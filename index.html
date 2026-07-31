@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jawsh & Ritah — The Jotahs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#08070a;
+    --panel:#141116;
+    --red:#FF1E3C;
+    --red-soft:rgba(255,30,60,0.14);
+    --white:#F6F4F5;
+    --gray:#9b939c;
+    --line:rgba(255,30,60,0.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Manrope', sans-serif; background:var(--black); color:var(--white); overflow-x:hidden;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600;}
+  ::selection{background:var(--red); color:var(--black);}
+
+  body::before{
+    content:''; position:fixed; top:-20%; left:50%; translate:-50% 0;
+    width:900px; height:900px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,30,60,0.16), transparent 65%);
+    pointer-events:none; z-index:0;
+  }
+
+  #stars{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+  .star{position:absolute; background:#fff; border-radius:50%; animation:twinkle ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:0.15;} 50%{opacity:0.9;}}
+  .shoot{position:absolute; width:2px; height:2px; background:#fff; border-radius:50%; box-shadow:0 0 0 1px rgba(255,255,255,0.6);}
+  .shoot::before{content:''; position:absolute; top:0; right:0; width:110px; height:1.5px; background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,30,60,0.5), transparent); transform:translateY(-50%);}
+  @keyframes shootMove{0%{transform:translate(0,0); opacity:0;} 5%{opacity:1;} 80%{opacity:1;} 100%{transform:translate(-420px,260px); opacity:0;}}
+
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 6vw; background:rgba(8,7,10,0.7); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-family:'Fraunces'; font-weight:600; font-size:1.15rem;}
+  .logo span{color:var(--red);}
+  .navlinks{display:flex; gap:32px; font-weight:600; font-size:0.88rem;}
+  .navlinks a{color:var(--gray); text-decoration:none; transition:color .2s;}
+  .navlinks a:hover{color:var(--white);}
+  .nav-cta{font-weight:700; font-size:0.85rem; background:var(--red); color:var(--white); padding:10px 20px; border-radius:999px; text-decoration:none; transition:box-shadow .2s, transform .2s; border:none; cursor:pointer; font-family:'Manrope';}
+  .nav-cta:hover{box-shadow:0 0 20px rgba(255,30,60,0.5); transform:translateY(-1px);}
+  .nav-cta.is-locked{background:var(--panel); color:var(--gray); border:1px solid var(--line);}
+  .nav-cta.is-locked:hover{box-shadow:none; transform:none;}
+
+  .hero{min-height:100svh; position:relative; z-index:2; overflow:hidden; display:flex; align-items:center; padding:150px 6vw 0; max-width:1300px; margin:0 auto;}
+  .hero-inner{max-width:640px; position:relative; z-index:3; padding-bottom:60px;}
+  .badge{display:inline-flex; align-items:center; gap:8px; background:var(--panel); border:1px solid var(--line); padding:7px 16px; border-radius:999px; font-size:0.8rem; font-weight:600; color:var(--gray); margin-bottom:26px;}
+  .badge .dot{width:7px; height:7px; border-radius:50%; background:var(--red); box-shadow:0 0 8px var(--red); animation:blink 1.6s infinite;}
+  @keyframes blink{0%,100%{opacity:1;} 50%{opacity:0.25;}}
+  .hero h1{font-size:clamp(2.4rem, 5.2vw, 3.6rem); line-height:1.12; letter-spacing:-0.5px;}
+  .hero h1 em{font-style:italic; color:var(--red);}
+  .hero p{margin-top:22px; color:var(--gray); font-size:1.08rem; line-height:1.6; max-width:520px;}
+  .btn-row{margin-top:38px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{font-family:'Manrope'; font-weight:700; font-size:0.92rem; border:none; cursor:pointer; padding:15px 28px; border-radius:999px; background:var(--red); color:var(--white); transition:transform 0.15s ease, box-shadow 0.25s ease; text-decoration:none; display:inline-block;}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 0 26px rgba(255,30,60,0.45);}
+  .btn:active{transform:translateY(0px) scale(0.98);}
+  .btn.secondary{background:transparent; color:var(--white); border:1px solid var(--line);}
+  .btn.secondary:hover{border-color:var(--red); box-shadow:0 0 16px rgba(255,30,60,0.25);}
+
+  .float-card{position:absolute; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px 18px; box-shadow:0 20px 40px rgba(0,0,0,0.5); display:flex; align-items:center; gap:12px; min-width:210px; z-index:3; animation:drift 6s ease-in-out infinite;}
+  .float-card .ic{width:36px; height:36px; border-radius:10px; background:var(--red-soft); color:var(--red); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;}
+  .float-card .txt-a{font-size:0.85rem; font-weight:700;}
+  .float-card .txt-b{font-size:0.75rem; color:var(--gray); margin-top:2px;}
+  .fc1{top:12%; right:6%;}
+  .fc2{top:34%; right:26%; animation-delay:1.2s;}
+  @keyframes drift{0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);}}
+
+  .countdown-label{font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--red); margin-top:40px;}
+  .counter-row{display:flex; gap:10px; margin-top:14px;}
+  .counter-box{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px 16px; min-width:64px; text-align:center;}
+  .counter-num{font-family:'Fraunces'; font-weight:600; font-size:1.5rem; color:var(--red);}
+  .counter-label{font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--gray); margin-top:2px;}
+
+  .bench-scene{position:absolute; left:0; right:0; bottom:0; height:44%; min-height:280px; z-index:1; pointer-events:none;}
+  .bench-scene svg{width:100%; height:100%; display:block;}
+  .bench-scene .fade-top{position:absolute; inset:0; background:linear-gradient(to bottom, var(--black) 0%, transparent 35%);}
+
+  section{position:relative; z-index:2; padding:110px 6vw; max-width:1200px; margin:0 auto;}
+  .section-head{max-width:600px; margin:0 auto 50px; text-align:center;}
+  .eyebrow{font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:2.5px; font-size:0.75rem;}
+  .section-head h2{font-size:clamp(1.8rem,4vw,2.6rem); margin-top:10px;}
+  .section-head p{color:var(--gray); margin-top:14px; font-size:1rem;}
+
+  /* ---------- lock system ---------- */
+  .lock-target{position:relative;}
+  .lock-inner{transition:filter .3s ease;}
+  .locked .lock-inner{filter:blur(6px); pointer-events:none; user-select:none;}
+  .lock-overlay{
+    display:none; position:absolute; inset:0; z-index:20;
+    flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    background:rgba(8,7,10,0.35); border-radius:20px; gap:10px; padding:20px;
+  }
+  .locked .lock-overlay{display:flex;}
+  .lock-overlay .ic{font-size:1.8rem;}
+  .lock-overlay .t1{font-family:'Fraunces'; font-weight:600; font-size:1.15rem;}
+  .lock-overlay .t2{font-size:0.85rem; color:var(--gray);}
+
+  /* ---------- vertical cover flow (shared) ---------- */
+  .vflow-row{display:flex; align-items:center; justify-content:center;}
+  .vflow-wrap{display:flex; flex-direction:column; align-items:center; max-width:420px; margin:0 auto;}
+  .vflow-track{width:100%; overflow-y:auto; scroll-snap-type:y mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; display:flex; flex-direction:column; align-items:center; gap:22px;}
+  .vflow-track::-webkit-scrollbar{display:none;}
+  .vflow-panel{scroll-snap-align:center; flex-shrink:0; width:100%; background:var(--panel); border:1px solid var(--line); border-radius:20px; text-align:center; cursor:pointer; transition:transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease; transform:scale(0.8); opacity:0.45;}
+  .vflow-panel.active{transform:scale(1.08); opacity:1; border-color:var(--red); box-shadow:0 20px 50px rgba(255,30,60,0.25);}
+  .vflow-dots{display:flex; flex-direction:column; gap:8px; margin-left:22px;}
+  .vflow-dot{width:7px; height:7px; border-radius:50%; background:var(--line); transition:background .2s, height .2s;}
+  .vflow-dot.active{background:var(--red); height:20px; border-radius:4px;}
+
+  .feature-panel{padding:22px 24px; display:flex; align-items:center; gap:18px; text-align:left;}
+  .feature-panel .ic{width:52px; height:52px; margin:0; border-radius:14px; background:var(--red-soft); display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:var(--red); flex-shrink:0;}
+  .feature-panel .txt{flex:1; min-width:0;}
+  .feature-panel .lbl{font-weight:700; font-size:1rem;}
+  .feature-panel .sub{font-size:0.8rem; color:var(--gray); margin-top:4px;}
+  .mini-link{
+    display:inline-block; margin-top:10px; font-size:0.78rem; font-weight:700; color:var(--red);
+    text-decoration:none; background:var(--red-soft); border:1px solid var(--line);
+    padding:7px 14px; border-radius:10px; transition:background .2s, border-color .2s;
+  }
+  .mini-link:hover{background:rgba(255,30,60,0.25); border-color:var(--red);}
+
+  .mem-panel{overflow:hidden; text-align:left;}
+  .mem-panel .thumb{aspect-ratio:16/7; background:linear-gradient(135deg, var(--red-soft), rgba(255,30,60,0.05)); display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:var(--red); border-bottom:1px solid var(--line);}
+  .mem-panel .info{padding:16px 18px;}
+  .mem-panel .t1{font-weight:700; font-size:0.95rem;}
+  .mem-panel .t2{font-size:0.78rem; color:var(--gray); margin-top:3px;}
+  .mem-panel .t2 span{color:var(--red); font-weight:700;}
+
+  .steps{display:flex; flex-direction:column; gap:0; max-width:680px; margin:0 auto;}
+  .step{display:flex; gap:24px; padding:28px 0; border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step-num{font-family:'Fraunces'; font-weight:600; font-size:1.4rem; color:var(--red); flex-shrink:0; width:40px;}
+  .step-title{font-weight:700; font-size:1.05rem; margin-bottom:6px;}
+  .step-desc{color:var(--gray); font-size:0.92rem; line-height:1.5;}
+
+  .letter-wrap{max-width:480px; margin:0 auto; text-align:center;}
+  .envelope{background:var(--panel); border-radius:20px; padding:48px 34px; border:1px solid var(--line);}
+  .envelope .seal{font-size:2.2rem; margin-bottom:14px; color:var(--red);}
+  .envelope .prompt{color:var(--gray); font-size:0.9rem; line-height:1.6;}
+
+  footer{text-align:center; padding:60px 6vw 90px; border-top:1px solid var(--line); position:relative; z-index:2;}
+  footer .names{font-family:'Fraunces'; font-weight:600; font-size:1.2rem; color:var(--red);}
+  footer .tiny{font-size:0.78rem; color:var(--gray); margin-top:10px;}
+
+  .burst-heart{position:fixed; pointer-events:none; font-size:1.2rem; z-index:999; color:var(--red); animation:burstUp 1s ease-out forwards;}
+  @keyframes burstUp{to{transform:translate(var(--dx), var(--dy)) scale(0.4); opacity:0;}}
+
+  .toast{
+    position:fixed; left:50%; bottom:34px; translate:-50% 0; z-index:999;
+    background:var(--panel); border:1px solid var(--red); color:var(--white);
+    padding:12px 22px; border-radius:999px; font-weight:600; font-size:0.88rem;
+    opacity:0; pointer-events:none; transition:opacity .3s ease, translate .3s ease;
+  }
+  .toast.show{opacity:1; translate:-50% -8px;}
+
+  @media (max-width:900px){
+    .hero{flex-direction:column; padding-top:130px;}
+    .float-card{display:none;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<nav>
+  <div class="logo">Jawsh <span>✕</span> Ritah</div>
+  <div class="navlinks">
+    <a href="#features">The Site</a>
+    <a href="#story">Our Story</a>
+    <a href="#memories">Memories</a>
+  </div>
+  <button class="nav-cta" id="noteNavBtn">Open Note</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="badge"><span class="dot"></span> Together since 18 August 2025</div>
+    <h1>A home for <em>our</em> memories, not just another gallery.</h1>
+    <p>Everything about us — the story, the moments, the little notes — kept in one place. No budget, just us. Mamito & Papito, still going.</p>
+    <div class="btn-row">
+      <a href="#story" class="btn">Open Our Story 💌</a>
+      <button class="btn secondary" id="heartBtn">Send a Heart</button>
+    </div>
+    <div class="countdown-label">🔒 Everything unlocks in</div>
+    <div class="counter-row" id="counterWrap">
+      <div class="counter-box"><div class="counter-num" id="cDays">0</div><div class="counter-label">Days</div></div>
+      <div class="counter-box"><div class="counter-num" id="cHours">0</div><div class="counter-label">Hrs</div></div>
+      <div class="counter-box"><div class="counter-num" id="cMins">0</div><div class="counter-label">Min</div></div>
+      <div class="counter-box"><div class="counter-num" id="cSecs">0</div><div class="counter-label">Sec</div></div>
+    </div>
+  </div>
+
+  <div class="float-card fc1"><div class="ic">💗</div><div><div class="txt-a">New memory added</div><div class="txt-b">Our First Date</div></div></div>
+  <div class="float-card fc2"><div class="ic">🔒</div><div><div class="txt-a">Locked for now</div><div class="txt-b">Opens 18 August</div></div></div>
+
+  <div class="bench-scene">
+    <div class="fade-top"></div>
+    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff1e3c" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#ff1e3c" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="4.5"/>
+        </filter>
+        <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0c0a0d"/>
+          <stop offset="100%" stop-color="#08070a"/>
+        </linearGradient>
+      </defs>
+      <circle cx="600" cy="230" r="140" fill="url(#moonGlow)"/>
+      <circle cx="600" cy="230" r="34" fill="#fff6ee" opacity="0.85" filter="url(#softBlur)"/>
+      <ellipse cx="600" cy="480" rx="650" ry="60" fill="url(#groundGrad)"/>
+      <g filter="url(#softBlur)" opacity="0.92">
+        <rect x="480" y="368" width="240" height="10" rx="3" fill="#1c1720"/>
+        <rect x="480" y="392" width="240" height="8" rx="3" fill="#1c1720"/>
+        <rect x="492" y="330" width="8" height="42" fill="#1c1720"/>
+        <rect x="700" y="330" width="8" height="42" fill="#1c1720"/>
+        <rect x="492" y="400" width="8" height="40" fill="#1c1720"/>
+        <rect x="700" y="400" width="8" height="40" fill="#1c1720"/>
+        <rect x="480" y="300" width="10" height="72" rx="3" fill="#1c1720"/>
+        <rect x="710" y="300" width="10" height="72" rx="3" fill="#1c1720"/>
+      </g>
+      <g filter="url(#softBlur)" fill="#0a080b">
+        <path d="M540,368 C536,330 552,300 580,296 C608,300 620,326 616,368 C616,368 612,388 610,392 L546,392 C544,388 540,368 540,368 Z"/>
+        <circle cx="582" cy="278" r="20"/>
+        <path d="M620,368 C614,332 628,304 654,300 C682,302 696,330 692,368 C692,368 688,390 686,394 L624,394 C622,390 620,368 620,368 Z"/>
+        <circle cx="656" cy="282" r="19"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section id="features" class="lock-target">
+  <div class="lock-inner">
+    <div class="section-head">
+      <div class="eyebrow">What's inside</div>
+      <h2>Everything about us, in one place</h2>
+      <p>Scroll up and down — the one in focus is what you're looking at.</p>
+    </div>
+    <div class="vflow-row">
+      <div class="vflow-wrap">
+        <div class="vflow-track" id="featureTrack">
+          <div class="vflow-panel feature-panel" data-i="0"><div class="ic">📖</div><div class="txt"><div class="lbl">Our Timeline</div><div class="sub">how it all started</div><a href="#story" class="mini-link" onclick="event.stopPropagation()">Read Our Story →</a></div></div>
+          <div class="vflow-panel feature-panel" data-i="1"><div class="ic">🖼️</div><div class="txt"><div class="lbl">Memory Vault</div><div class="sub">our favourite moments</div><a href="#memories" class="mini-link" onclick="event.stopPropagation()">Open Vault →</a></div></div>
+          <div class="vflow-panel feature-panel" data-i="2"><div class="ic">💌</div><div class="txt"><div class="lbl">Love Notes</div><div class="sub">just for you</div><a href="note.html" class="mini-link" onclick="event.stopPropagation()">Open Note →</a></div></div>
+          <div class="vflow-panel feature-panel" data-i="3"><div class="ic">🎧</div><div class="txt"><div class="lbl">Our Playlist</div><div class="sub">songs that remind me of us</div><a href="playlist.html" class="mini-link" onclick="event.stopPropagation()">Open Playlist →</a></div></div>
+          <div class="vflow-panel feature-panel" data-i="4"><div class="ic">🔮</div><div class="txt"><div class="lbl">Future Plans</div><div class="sub">what's next for us</div><a href="future-plans.html" class="mini-link" onclick="event.stopPropagation()">Read Our Dreams →</a></div></div>
+        </div>
+      </div>
+      <div class="vflow-dots" id="featureDots"></div>
+    </div>
+  </div>
+  <div class="lock-overlay">
+    <div class="ic">🔒</div>
+    <div class="t1">Locked for now</div>
+    <div class="t2">Unlocks 18 August 2026</div>
+  </div>
+</section>
+
+<section id="story" class="lock-target">
+  <div class="lock-inner">
+    <div class="section-head">
+      <div class="eyebrow">How we got here</div>
+      <h2>Our story, one step at a time</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div><div class="step-title">The First Glance</div><div class="step-desc">One evening after a long day at work, I went to the rooftop of Bank of Africa in Fort Portal City to clear my mind — and that's when I saw a beautiful young woman walking below. Unlike David and Bathsheba, ours would become a story of love, patience, and God's grace.</div></div></div>
+      <div class="step"><div class="step-num">02</div><div><div class="step-title">Right Place, Right Time</div><div class="step-desc">I wasn't alone that evening — I was with someone who knew you personally. When he saw I couldn't take my eyes off you, I told him: "I think I've just seen someone I want to spend the rest of my life with." He gave me your contact. God had placed me in the right place at exactly the right time.</div></div></div>
+      <div class="step"><div class="step-num">03</div><div><div class="step-title">Winning Your Heart (2024)</div><div class="step-desc">You weren't exactly welcoming at first — principled, careful, skeptical of a stranger. Over time we became close friends. You'd change the topic whenever I brought up love. You weren't ready. But I wasn't ready to give up either. You once even stopped me from betting because you genuinely cared about my future — that's when I knew you weren't just beautiful, you wanted me to become a better man. And finally, I was getting a place in your heart.</div></div></div>
+      <div class="step"><div class="step-num">04</div><div><div class="step-title">Hope Arrives — 10 August</div><div class="step-desc">On my birthday, you sent a message that changed everything: "I asked people who knew you, and I found out you are not a bad person." You mentioned it was unfortunate I'd already left Fort Portal before we could meet. I promised you: "I'll be back... and we'll finally meet."</div></div></div>
+      <div class="step"><div class="step-num">05</div><div><div class="step-title">Our First Meeting</div><div class="step-desc">I returned to Fort Portal for my parents' celebration, and we finally met at Richard's Sweetness World, Khunga–Bunyonyi. You were even more beautiful in person than the girl I first saw from the rooftop. We talked, we laughed, and every minute made me more certain you were the woman I'd been praying for.</div></div></div>
+      <div class="step"><div class="step-num">06</div><div><div class="step-title">The Day Everything Changed — 18 August</div><div class="step-desc">The words I'd waited over a year and a half to hear finally came: "Yes... I love you too." That day didn't just begin our relationship — it began a new version of me.</div></div></div>
+      <div class="step"><div class="step-num">07</div><div><div class="step-title">A Better Man</div><div class="step-desc">You became one of the greatest blessings God has given me. You changed my thinking, my habits, the way I see life. I don't represent only myself anymore — I represent us. We've had misunderstandings and moments that tested us, but through it all, you have never given up on us. Here's to forever. I love you, Ritah.</div></div></div>
+    </div>
+  </div>
+  <div class="lock-overlay">
+    <div class="ic">🔒</div>
+    <div class="t1">Locked for now</div>
+    <div class="t2">Unlocks 18 August 2026</div>
+  </div>
+</section>
+
+<section id="memories" class="lock-target">
+  <div class="lock-inner">
+    <div class="section-head">
+      <div class="eyebrow">Archive</div>
+      <h2>A few of our moments</h2>
+      <p>Same idea — scroll to bring one into focus.</p>
+    </div>
+    <div class="vflow-row">
+      <div class="vflow-wrap">
+        <div class="vflow-track" id="memTrack">
+          <div class="vflow-panel mem-panel" data-i="0"><div class="thumb" style="background:none; padding:0;"><img src="photo-rooftop.jpg" alt="The rooftop where I first saw you" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div class="info"><div class="t1">The First Glance</div><div class="t2"><span>Fort Portal</span> · Bank of Africa rooftop</div></div></div>
+          <div class="vflow-panel mem-panel" data-i="1"><div class="thumb">📱</div><div class="info"><div class="t1">Winning Your Heart</div><div class="t2"><span>2024</span> · a year of patience</div></div></div>
+          <div class="vflow-panel mem-panel" data-i="2"><div class="thumb">🎂</div><div class="info"><div class="t1">Hope Arrives</div><div class="t2"><span>10 August</span> · the birthday message</div></div></div>
+          <div class="vflow-panel mem-panel" data-i="3"><div class="thumb">🍰</div><div class="info"><div class="t1">Our First Meeting</div><div class="t2"><span>saved</span> · Richard's Sweetness World</div></div></div>
+          <div class="vflow-panel mem-panel" data-i="4"><div class="thumb">❤️</div><div class="info"><div class="t1">The Day Everything Changed</div><div class="t2"><span>18 August</span> · "Yes... I love you too"</div></div></div>
+          <div class="vflow-panel mem-panel" data-i="5" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-02.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="6" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-03.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="7" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-04.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="8" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-05.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="9" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-06.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="10" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-07.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="11" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-08.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="12" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-09.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="13" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-10.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="14" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-11.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
+          <div class="vflow-panel mem-panel" data-i="15" style="border-style:dashed;"><div class="thumb">+</div><div class="info"><div class="t1">Add memory</div><div class="t2">upload photo</div></div></div>
+        </div>
+      </div>
+      <div class="vflow-dots" id="memDots"></div>
+    </div>
+  </div>
+  <div class="lock-overlay">
+    <div class="ic">🔒</div>
+    <div class="t1">Locked for now</div>
+    <div class="t2">Unlocks 18 August 2026</div>
+  </div>
+</section>
+
+<section id="letter" class="lock-target">
+  <div class="lock-inner">
+    <div class="section-head">
+      <div class="eyebrow">For Ritah</div>
+      <h2>A little note</h2>
+    </div>
+    <div class="letter-wrap">
+      <div class="envelope">
+        <div class="seal">💌</div>
+        <div class="prompt">This one gets its own page, and it's locked behind a question only you'd know.</div>
+        <button class="btn" id="noteBtn" style="margin-top:20px;">Open The Note →</button>
+      </div>
+    </div>
+  </div>
+  <div class="lock-overlay">
+    <div class="ic">🔒</div>
+    <div class="t1">Locked for now</div>
+    <div class="t2">Unlocks 18 August 2026</div>
+  </div>
+</section>
+
+<footer>
+  <div class="names">Mamito ✕ Papito</div>
+  <div class="tiny">Built with love, not a budget. — The Jotahs, since 18.08.2025</div>
+</footer>
+
+<div class="toast" id="toast">🔒 Unlocks 18 August 2026</div>
+
+<script>
+  const starsWrap = document.getElementById('stars');
+  for(let i=0;i<90;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    const size = Math.random()*2+0.6;
+    s.style.width = size+'px'; s.style.height = size+'px';
+    s.style.left = Math.random()*100+'vw'; s.style.top = Math.random()*100+'vh';
+    s.style.animationDuration = (2+Math.random()*4)+'s';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    starsWrap.appendChild(s);
+  }
+  function spawnShootingStar(){
+    const s = document.createElement('div');
+    s.className='shoot';
+    s.style.left = (Math.random()*100)+'vw';
+    s.style.top = (Math.random()*40)+'vh';
+    s.style.animation = 'shootMove '+(1.1+Math.random()*0.6)+'s linear forwards';
+    starsWrap.appendChild(s);
+    setTimeout(()=>s.remove(), 2000);
+  }
+  setInterval(()=>{ if(Math.random()<0.7) spawnShootingStar(); }, 2600);
+  spawnShootingStar();
+
+  // --- unlock date: 18 August 2026 ---
+  const unlockDate = new Date('2026-08-18T00:00:00');
+  const previewKey = new URLSearchParams(window.location.search).get('preview');
+  const PREVIEW_CODE = 'mamito2026';
+  const isLocked = (new Date() < unlockDate) && previewKey !== PREVIEW_CODE;
+  if(isLocked){ document.body.classList.add('locked'); }
+
+  function tick(){
+    const now = new Date();
+    let diff = unlockDate - now;
+    if(diff < 0) diff = 0;
+    document.getElementById('cDays').textContent = Math.floor(diff/86400000);
+    document.getElementById('cHours').textContent = Math.floor((diff%86400000)/3600000);
+    document.getElementById('cMins').textContent = Math.floor((diff%3600000)/60000);
+    document.getElementById('cSecs').textContent = Math.floor((diff%60000)/1000);
+  }
+  tick(); setInterval(tick, 1000);
+
+  function showToast(){
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(()=> t.classList.remove('show'), 2200);
+  }
+
+  const noteNavBtn = document.getElementById('noteNavBtn');
+  const noteBtn = document.getElementById('noteBtn');
+  function handleNoteClick(){
+    if(isLocked){ showToast(); }
+    else{ window.location.href = 'note.html'; }
+  }
+  noteNavBtn.textContent = isLocked ? '🔒 Open Note' : 'Open Note';
+  if(isLocked) noteNavBtn.classList.add('is-locked');
+  noteNavBtn.addEventListener('click', handleNoteClick);
+  noteBtn.addEventListener('click', handleNoteClick);
+
+  document.getElementById('heartBtn').addEventListener('click', function(e){
+    for(let i=0;i<12;i++){
+      const h = document.createElement('div');
+      h.className='burst-heart';
+      h.textContent = ['💗','💛','✨','❤️'][Math.floor(Math.random()*4)];
+      h.style.left = e.clientX+'px'; h.style.top = e.clientY+'px';
+      const angle = Math.random()*Math.PI*2, dist = 60+Math.random()*90;
+      h.style.setProperty('--dx', Math.cos(angle)*dist+'px');
+      h.style.setProperty('--dy', Math.sin(angle)*dist+'px');
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 1000);
+    }
+  });
+
+  function initVFlow(trackId, dotsId){
+    const track = document.getElementById(trackId);
+    const dotsWrap = document.getElementById(dotsId);
+    const panels = Array.from(track.querySelectorAll('.vflow-panel'));
+    panels.forEach((p,i)=>{
+      const d = document.createElement('div');
+      d.className='vflow-dot'; d.dataset.i = i;
+      dotsWrap.appendChild(d);
+    });
+    const dots = Array.from(dotsWrap.children);
+    function update(){
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.top + trackRect.height/2;
+      let closestIdx = 0, closestDist = Infinity;
+      panels.forEach((panel, i)=>{
+        const r = panel.getBoundingClientRect();
+        const panelCenter = r.top + r.height/2;
+        const dist = Math.abs(panelCenter - center);
+        const norm = Math.min(dist / (trackRect.height/2), 1);
+        panel.style.transform = 'scale('+(1.08 - norm*0.34)+')';
+        panel.style.opacity = 1 - norm*0.6;
+        panel.classList.toggle('active', norm < 0.18);
+        if(dist < closestDist){ closestDist = dist; closestIdx = i; }
+      });
+      dots.forEach((d,i)=> d.classList.toggle('active', i===closestIdx));
+    }
+    track.addEventListener('scroll', ()=> requestAnimationFrame(update));
+    window.addEventListener('resize', update);
+    panels.forEach(p=> p.addEventListener('click', ()=> p.scrollIntoView({behavior:'smooth', block:'center'})));
+    dots.forEach(d=> d.addEventListener('click', ()=> panels[d.dataset.i].scrollIntoView({behavior:'smooth', block:'center'})));
+    track.addEventListener('wheel', (e)=>{
+      const atTop = track.scrollTop <= 0 && e.deltaY < 0;
+      const atBottom = track.scrollTop + track.clientHeight >= track.scrollHeight - 1 && e.deltaY > 0;
+      if(!atTop && !atBottom){ e.preventDefault(); track.scrollTop += e.deltaY; }
+    }, {passive:false});
+    function sizeTrack(){
+      const h = Math.min(460, window.innerHeight*0.55);
+      track.style.height = h+'px';
+      const panelH = panels[0] ? panels[0].getBoundingClientRect().height : 180;
+      const pad = Math.max(0,(h - panelH)/2);
+      track.style.paddingTop = pad+'px';
+      track.style.paddingBottom = pad+'px';
+      update();
+    }
+    window.addEventListener('resize', sizeTrack);
+    setTimeout(sizeTrack, 30);
+  }
+  initVFlow('featureTrack','featureDots');
+  initVFlow('memTrack','memDots');
+</script>
+
+</body>
+</html>

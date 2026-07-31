@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Future Plans — Jawsh & Ritah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#08070a; --panel:#141116; --red:#FF1E3C; --red-soft:rgba(255,30,60,0.14);
+    --white:#F6F4F5; --gray:#9b939c; --line:rgba(255,30,60,0.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Manrope', sans-serif; background:var(--black); color:var(--white);
+    min-height:100svh; overflow-x:hidden; position:relative;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  h1,h2{font-family:'Fraunces', serif; font-weight:600;}
+  ::selection{background:var(--red); color:var(--black);}
+  body::before{content:''; position:fixed; top:-15%; left:50%; translate:-50% 0; width:800px; height:800px; border-radius:50%; background:radial-gradient(circle, rgba(255,30,60,0.16), transparent 65%); pointer-events:none; z-index:0;}
+  #stars{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+  .star{position:absolute; background:#fff; border-radius:50%; animation:twinkle ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:0.15;} 50%{opacity:0.9;}}
+  .shoot{position:absolute; width:2px; height:2px; background:#fff; border-radius:50%; box-shadow:0 0 0 1px rgba(255,255,255,0.6);}
+  .shoot::before{content:''; position:absolute; top:0; right:0; width:110px; height:1.5px; background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,30,60,0.5), transparent); transform:translateY(-50%);}
+  @keyframes shootMove{0%{transform:translate(0,0); opacity:0;} 5%{opacity:1;} 80%{opacity:1;} 100%{transform:translate(-420px,260px); opacity:0;}}
+
+  .wrap{position:relative; z-index:2; max-width:680px; margin:0 auto; padding:100px 6vw 90px;}
+  .back{display:inline-block; color:var(--gray); text-decoration:none; font-weight:700; font-size:0.85rem; margin-bottom:34px;}
+  .back:hover{color:var(--white);}
+  .head{text-align:center; margin-bottom:50px;}
+  .eyebrow{font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:2.5px; font-size:0.75rem;}
+  .head h1{font-size:clamp(1.9rem,5vw,2.6rem); margin-top:10px;}
+  .head p{color:var(--gray); margin-top:14px; font-size:0.98rem; line-height:1.6; max-width:480px; margin-left:auto; margin-right:auto;}
+
+  .plan{
+    background:var(--panel); border:1px solid var(--line); border-radius:18px;
+    padding:26px 24px; margin-bottom:18px; display:flex; gap:18px; align-items:flex-start;
+  }
+  .plan .ic{
+    width:44px; height:44px; border-radius:12px; background:var(--red-soft); color:var(--red);
+    display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0;
+  }
+  .plan .title{font-weight:700; font-size:1.02rem; margin-bottom:6px;}
+  .plan .desc{color:var(--gray); font-size:0.92rem; line-height:1.6;}
+
+  .closing{
+    text-align:center; margin-top:50px; padding-top:40px; border-top:1px solid var(--line);
+  }
+  .closing p{color:var(--white); font-family:'Fraunces'; font-size:1.2rem; line-height:1.7; font-weight:500;}
+  .closing .sign{margin-top:20px; color:var(--red); font-weight:700; font-family:'Manrope';}
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<div class="wrap">
+  <a href="index.html" class="back">← Back to our site</a>
+  <div class="head">
+    <div class="eyebrow">Our Future Plans</div>
+    <h1>This is more than a list of dreams ✨</h1>
+    <p>It's a promise of the life I hope we build together, one day at a time.</p>
+  </div>
+
+  <div class="plan"><div class="ic">💍</div><div><div class="title">Build a God-Centered Marriage</div><div class="desc">Our greatest dream is to stand before God, exchange our vows, and begin a lifetime together as husband and wife. We want our home to be built on love, faith, trust, forgiveness, and prayer.</div></div></div>
+
+  <div class="plan"><div class="ic">🏡</div><div><div class="title">Build Our Dream Home</div><div class="desc">One day, we'll unlock the door to a home we can truly call ours — a place filled with laughter, peace, music, and countless beautiful memories.</div></div></div>
+
+  <div class="plan"><div class="ic">👨‍👩‍👧‍👦</div><div><div class="title">Raise a Beautiful Family</div><div class="desc">I dream of raising children with you, teaching them kindness, faith, respect, and love. I want them to grow up knowing what true love looks like because they'll see it in us.</div></div></div>
+
+  <div class="plan"><div class="ic">✈️</div><div><div class="title">Travel the World Together</div><div class="desc">I want us to explore the world hand in hand, watch sunsets in places we've never been, take countless photos, and create memories that will last forever.</div></div></div>
+
+  <div class="plan"><div class="ic">🌍</div><div><div class="title">Grow Together</div><div class="desc">I don't just want us to grow older — I want us to grow together. To encourage one another, celebrate each victory, support each dream, and become better people every single day.</div></div></div>
+
+  <div class="plan"><div class="ic">❤️</div><div><div class="title">Love Through Every Season</div><div class="desc">Life won't always be easy. There will be challenges, disappointments, and moments that test us. But I promise that no matter what season we find ourselves in, I'll keep choosing you, loving you, listening to you, and fighting for us.</div></div></div>
+
+  <div class="plan"><div class="ic">🎁</div><div><div class="title">Create Beautiful Memories</div><div class="desc">Whether it's a simple evening walk, celebrating birthdays, taking random road trips, watching movies, or having dinner together, I want us to treasure the little moments because they often become the biggest memories.</div></div></div>
+
+  <div class="plan"><div class="ic">🌹</div><div><div class="title">A Promise From My Heart</div><div class="desc">Today, I may not have everything I wish I could give you, but I have a heart that is committed to working hard for our future. I promise to do my best to build a life where you feel loved, respected, secure, and appreciated. Above all, I want to be the husband who makes you feel cherished — not because of what I can buy, but because of how faithfully I love you.</div></div></div>
+
+  <div class="closing">
+    <p>My biggest dream isn't simply to have a future with you.<br>My biggest dream is to spend every tomorrow choosing you all over again.<br><br>No matter where life takes us... no matter how many years pass...<br>you will always be my favorite place to call home.</p>
+    <div class="sign">Here's to forever, my love. ❤️ — Jawsh</div>
+  </div>
+</div>
+
+<script>
+  const starsWrap = document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    const size = Math.random()*2+0.6;
+    s.style.width = size+'px'; s.style.height = size+'px';
+    s.style.left = Math.random()*100+'vw'; s.style.top = Math.random()*100+'vh';
+    s.style.animationDuration = (2+Math.random()*4)+'s';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    starsWrap.appendChild(s);
+  }
+  function spawnShootingStar(){
+    const s = document.createElement('div');
+    s.className='shoot';
+    s.style.left = (Math.random()*100)+'vw';
+    s.style.top = (Math.random()*40)+'vh';
+    s.style.animation = 'shootMove '+(1.1+Math.random()*0.6)+'s linear forwards';
+    starsWrap.appendChild(s);
+    setTimeout(()=>s.remove(), 2000);
+  }
+  setInterval(()=>{ if(Math.random()<0.7) spawnShootingStar(); }, 2600);
+  spawnShootingStar();
+</script>
+
+</body>
+</html>
