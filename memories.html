@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Vault — Jawsh & Ritah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#08070a; --panel:#141116; --red:#FF1E3C; --red-soft:rgba(255,30,60,0.14);
+    --white:#F6F4F5; --gray:#9b939c; --line:rgba(255,30,60,0.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Manrope', sans-serif; background:var(--black); color:var(--white);
+    min-height:100svh; overflow-x:hidden; position:relative;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  h1,h2{font-family:'Fraunces', serif; font-weight:600;}
+  ::selection{background:var(--red); color:var(--black);}
+  body::before{content:''; position:fixed; top:-15%; left:50%; translate:-50% 0; width:800px; height:800px; border-radius:50%; background:radial-gradient(circle, rgba(255,30,60,0.16), transparent 65%); pointer-events:none; z-index:0;}
+  #stars{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+  .star{position:absolute; background:#fff; border-radius:50%; animation:twinkle ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:0.15;} 50%{opacity:0.9;}}
+
+  .wrap{position:relative; z-index:2; max-width:900px; margin:0 auto; padding:100px 6vw 90px;}
+  .back{display:inline-block; color:var(--gray); text-decoration:none; font-weight:700; font-size:0.85rem; margin-bottom:34px;}
+  .back:hover{color:var(--white);}
+  .head{text-align:center; margin-bottom:44px;}
+  .eyebrow{font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:2.5px; font-size:0.75rem;}
+  .head h1{font-size:clamp(1.9rem,5vw,2.6rem); margin-top:10px;}
+  .head p{color:var(--gray); margin-top:12px; font-size:0.95rem;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:18px;}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden; cursor:zoom-in; transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;}
+  .card:hover{transform:translateY(-4px); border-color:var(--red); box-shadow:0 14px 30px rgba(255,30,60,0.18);}
+  .card img{width:100%; aspect-ratio:3/4; object-fit:cover; display:block;}
+  .card .cap{padding:12px 14px;}
+  .card .t1{font-weight:700; font-size:0.85rem;}
+  .card .t2{font-size:0.72rem; color:var(--gray); margin-top:2px;}
+
+  .card video{cursor:default;}
+  .track{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:14px;}
+
+  .lightbox{position:fixed; inset:0; background:rgba(4,3,5,0.92); display:none; align-items:center; justify-content:center; z-index:2000; padding:24px; cursor:zoom-out;}
+  .lightbox.show{display:flex;}
+  .lightbox img{max-width:92vw; max-height:88vh; border-radius:14px; box-shadow:0 30px 80px rgba(0,0,0,0.6);}
+  .lightbox .hint{position:absolute; bottom:26px; left:50%; translate:-50% 0; color:var(--gray); font-size:0.78rem; letter-spacing:1px; text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+<div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt=""><div class="hint">tap anywhere to close</div></div>
+
+<div class="wrap">
+  <a href="index.html" class="back">← Back to our site</a>
+  <div class="head">
+    <div class="eyebrow">Memory Vault</div>
+    <h1>Our favourite moments 🖼️</h1>
+    <p>Tap any photo to see it bigger.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card"><img src="photo-rooftop.jpg" alt="The rooftop where I first saw you"><div class="cap"><div class="t1">The First Glance</div><div class="t2">Fort Portal · Bank of Africa rooftop</div></div></div>
+    <div class="card"><img src="memory-02.jpg" alt=""></div>
+    <div class="card"><img src="memory-03.jpg" alt=""></div>
+    <div class="card"><img src="memory-04.jpg" alt=""></div>
+    <div class="card"><img src="memory-05.jpg" alt=""></div>
+    <div class="card"><img src="memory-06.jpg" alt=""></div>
+    <div class="card"><img src="memory-07.jpg" alt=""></div>
+    <div class="card"><img src="memory-08.jpg" alt=""></div>
+    <div class="card"><img src="memory-09.jpg" alt=""></div>
+    <div class="card"><img src="memory-10.jpg" alt=""></div>
+    <div class="card"><img src="memory-11.jpg" alt=""></div>
+    <div class="card"><img src="memory-12.jpg" alt=""></div>
+    <div class="card"><img src="memory-13.jpg" alt=""></div>
+  </div>
+
+  <div class="head" style="margin-top:60px;">
+    <div class="eyebrow">In Motion</div>
+    <h1 style="font-size:clamp(1.6rem,4vw,2.2rem);">A few clips of us 🎬</h1>
+    <p>Tap play on the song below for music while you watch — the clips themselves are silent.</p>
+  </div>
+
+  <div class="track" style="margin-bottom:30px;">
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0T5iIrXA4p5GsubkhuBIKV?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+
+  <div class="grid">
+    <div class="card"><video src="memory-vid-1.mp4" controls muted playsinline preload="metadata" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block; background:#000;"></video></div>
+    <div class="card"><video src="memory-vid-2.mp4" controls muted playsinline preload="metadata" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block; background:#000;"></video></div>
+    <div class="card"><video src="memory-vid-3.mp4" controls muted playsinline preload="metadata" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block; background:#000;"></video></div>
+    <div class="card"><video src="memory-vid-4.mp4" controls muted playsinline preload="metadata" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block; background:#000;"></video></div>
+  </div>
+</div>
+
+<script>
+  const starsWrap = document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    const size = Math.random()*2+0.6;
+    s.style.width = size+'px'; s.style.height = size+'px';
+    s.style.left = Math.random()*100+'vw'; s.style.top = Math.random()*100+'vh';
+    s.style.animationDuration = (2+Math.random()*4)+'s';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    starsWrap.appendChild(s);
+  }
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('.card img').forEach(img=>{
+    img.addEventListener('click', function(){
+      lightboxImg.src = this.src;
+      lightbox.classList.add('show');
+    });
+  });
+  lightbox.addEventListener('click', ()=> lightbox.classList.remove('show'));
+</script>
+
+</body>
+</html>

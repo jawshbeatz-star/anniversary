@@ -103,11 +103,10 @@
   .site-title{
     position:relative; z-index:2;
     font-family:'Playfair Display', serif; font-weight:700; font-style:italic;
-    font-size:clamp(2.8rem, 8vw, 5.2rem); line-height:1.05; letter-spacing:0.5px;
+    font-size:clamp(2.5rem, 7.5vw, 4.9rem); line-height:1.1; letter-spacing:0.5px;
   }
-  .type-reveal{display:inline-block; overflow:hidden; white-space:nowrap; border-right:3px solid var(--red); width:0; animation:typing 1.8s steps(24,end) forwards, blinkCursor 0.75s step-end infinite;}
-  @keyframes typing{from{width:0;} to{width:100%;}}
-  @keyframes blinkCursor{50%{border-color:transparent;}}
+  .type-reveal{display:inline-block; opacity:0; transform:translateY(10px); animation:revealTitle 0.9s ease forwards 0.15s;}
+  @keyframes revealTitle{to{opacity:1; transform:translateY(0);}}
   .site-title .amp{color:var(--red); font-style:italic;}
 
   .tagline{position:relative; z-index:2; margin-top:16px; color:var(--gray); font-size:0.95rem; font-weight:600; max-width:440px; margin-left:auto; margin-right:auto;}
@@ -225,7 +224,6 @@
 <body>
 
 <div id="stars"></div>
-<div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt=""><div class="hint">tap anywhere to close</div></div>
 
 <nav>
   <div class="logo" id="logoTap">Jawsh <span>✕</span> Ritah</div>
@@ -310,7 +308,7 @@
         <div class="vflow-wrap">
           <div class="vflow-track" id="featureTrack">
             <div class="vflow-panel feature-panel" data-i="0"><div class="ic">📖</div><div class="txt"><div class="lbl">Our Timeline</div><div class="sub">how it all started</div><a href="#story" class="mini-link" onclick="event.stopPropagation()">Read Our Story →</a></div></div>
-            <div class="vflow-panel feature-panel" data-i="1"><div class="ic">🖼️</div><div class="txt"><div class="lbl">Memory Vault</div><div class="sub">our favourite moments</div><a href="#memories" class="mini-link" onclick="event.stopPropagation()">Open Vault →</a></div></div>
+            <div class="vflow-panel feature-panel" data-i="1"><div class="ic">🖼️</div><div class="txt"><div class="lbl">Memory Vault</div><div class="sub">our favourite moments</div><a href="memories.html" class="mini-link" onclick="event.stopPropagation()">Open Vault →</a></div></div>
             <div class="vflow-panel feature-panel" data-i="2"><div class="ic">💌</div><div class="txt"><div class="lbl">Love Notes</div><div class="sub">just for you</div><a href="note.html" class="mini-link" onclick="event.stopPropagation()">Open Note →</a></div></div>
             <div class="vflow-panel feature-panel" data-i="3"><div class="ic">🎧</div><div class="txt"><div class="lbl">Our Playlist</div><div class="sub">songs that remind me of us</div><a href="playlist.html" class="mini-link" onclick="event.stopPropagation()">Open Playlist →</a></div></div>
             <div class="vflow-panel feature-panel" data-i="4"><div class="ic">🔮</div><div class="txt"><div class="lbl">Future Plans</div><div class="sub">what's next for us</div><a href="future-plans.html" class="mini-link" onclick="event.stopPropagation()">Read Our Dreams →</a></div></div>
@@ -339,7 +337,7 @@
       <div class="step"><div class="step-num">02</div><div><div class="step-title">Right Place, Right Time</div><div class="step-desc">I wasn't alone that evening — I was with someone who knew you personally. When he saw I couldn't take my eyes off you, I told him: "I think I've just seen someone I want to spend the rest of my life with." He gave me your contact. God had placed me in the right place at exactly the right time.</div></div></div>
       <div class="step"><div class="step-num">03</div><div><div class="step-title">Winning Your Heart (2024)</div><div class="step-desc">You weren't exactly welcoming at first — principled, careful, skeptical of a stranger. Over time we became close friends. You'd change the topic whenever I brought up love. You weren't ready. But I wasn't ready to give up either. You once even stopped me from betting because you genuinely cared about my future — that's when I knew you weren't just beautiful, you wanted me to become a better man. And finally, I was getting a place in your heart.</div></div></div>
       <div class="step"><div class="step-num">04</div><div><div class="step-title">Hope Arrives — 10 August</div><div class="step-desc">On my birthday, you sent a message that changed everything: "I asked people who knew you, and I found out you are not a bad person." You mentioned it was unfortunate I'd already left Fort Portal before we could meet. I promised you: "I'll be back... and we'll finally meet."</div></div></div>
-      <div class="step"><div class="step-num">05</div><div><div class="step-title">Our First Meeting</div><div class="step-desc">I returned to Fort Portal for my parents' celebration, and we finally met at Richard's Sweetness World, Khunga–Bunyonyi. You were even more beautiful in person than the girl I first saw from the rooftop. We talked, we laughed, and every minute made me more certain you were the woman I'd been praying for.</div></div></div>
+      <div class="step"><div class="step-num">05</div><div><div class="step-title">Our First Meeting</div><div class="step-desc">I returned to Fort Portal for my parents' celebration, and we finally met at a restaurant in Kahunga-Bunyonyi. You were even more beautiful in person than the girl I first saw from the rooftop. We talked, we laughed, and every minute made me more certain you were the woman I'd been praying for.</div></div></div>
       <div class="step"><div class="step-num">06</div><div><div class="step-title">The Day Everything Changed — 18 August</div><div class="step-desc">The words I'd waited over a year and a half to hear finally came: "Yes... I love you too." That day didn't just begin our relationship — it began a new version of me.</div></div></div>
       <div class="step"><div class="step-num">07</div><div><div class="step-title">A Better Man</div><div class="step-desc">You became one of the greatest blessings God has given me. You changed my thinking, my habits, the way I see life. I don't represent only myself anymore — I represent us. We've had misunderstandings and moments that tested us, but through it all, you have never given up on us. Here's to forever. I love you, Ritah.</div></div></div>
     </div>
@@ -356,29 +354,14 @@
     <div class="section-head">
       <div class="eyebrow">Archive</div>
       <h2>A few of our moments</h2>
-      <p>Scroll or tap the arrows to bring one into focus — tap a photo to zoom in.</p>
+      <p>All our photos, kept safe in one place.</p>
     </div>
-    <div class="vflow-row">
-      <div class="vflow-col">
-        <button class="vflow-arrow up" aria-label="scroll up">▲</button>
-        <div class="vflow-wrap">
-          <div class="vflow-track" id="memTrack">
-            <div class="vflow-panel mem-panel" data-i="0"><div class="thumb" style="background:none; padding:0;"><img src="photo-rooftop.jpg" alt="The rooftop where I first saw you" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div class="info"><div class="t1">The First Glance</div><div class="t2"><span>Fort Portal</span> · Bank of Africa rooftop</div></div></div>
-            <div class="vflow-panel mem-panel" data-i="1" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-02.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="2" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-03.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="3" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-04.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="4" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-05.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="5" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-06.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="6" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-07.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="7" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-08.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="8" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-09.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="9" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-10.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-            <div class="vflow-panel mem-panel" data-i="10" style="padding:0;"><div class="thumb" style="background:none; padding:0; aspect-ratio:3/4;"><img src="memory-11.jpg" style="width:100%; height:100%; object-fit:cover; display:block;"></div></div>
-          </div>
-        </div>
-        <button class="vflow-arrow down" aria-label="scroll down">▼</button>
+    <div class="letter-wrap">
+      <div class="envelope">
+        <div class="seal">🖼️</div>
+        <div class="prompt">Every photo we've saved so far, waiting for you.</div>
+        <a href="memories.html" class="btn" style="margin-top:20px;">Open Memory Vault →</a>
       </div>
-      <div class="vflow-dots" id="memDots"></div>
     </div>
   </div>
   <div class="lock-overlay">
@@ -559,18 +542,6 @@
     }
   });
 
-  // --- photo lightbox ---
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  document.querySelectorAll('.mem-panel img').forEach(img=>{
-    img.addEventListener('click', function(e){
-      e.stopPropagation();
-      lightboxImg.src = this.src;
-      lightbox.classList.add('show');
-    });
-  });
-  lightbox.addEventListener('click', ()=> lightbox.classList.remove('show'));
-
   function initVFlow(trackId, dotsId){
     const track = document.getElementById(trackId);
     const dotsWrap = document.getElementById(dotsId);
@@ -628,7 +599,6 @@
     setTimeout(sizeTrack, 30);
   }
   initVFlow('featureTrack','featureDots');
-  initVFlow('memTrack','memDots');
 </script>
 
 </body>
